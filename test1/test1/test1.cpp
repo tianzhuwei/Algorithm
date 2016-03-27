@@ -1,10 +1,9 @@
 #include <iostream>
 using namespace std;
-//Õâ¸ö³ÌÐòÊÇÓÃÀ´ÅÐ¶ÏÒ»¸öÐòÁÐÊÇ·ñÊÇÒ»¸ö¶þ²æÊ÷µÄºóÐò±éÀú;
-/*Ö÷ÒªË¼Ïë£º ÉèÒ»¸ö¶þ²æ²éÕÒÊ÷µÄºóÐò±éÀúË³ÐòÊÇ   D E B F G C A ;
-	ÔòÎÒÃÇ¿ÉÒÔÖªµÀAÎªÕâ¿ÃÊ÷µÄ ¸ù½áµã  ´Óºóµ½Ç°½øÐÐ±È½Ïµ±Óöµ½±ÈAÐ¡µÄÊ±ºò Ö®ºóµÄµã¼´ÎªAµÄ×ó×ÓÊ÷£¬½øÐÐµÝ¹éµ÷ÓÃ¼´¿É;
+//è¿™ä¸ªç¨‹åºæ˜¯ç”¨æ¥åˆ¤æ–­ä¸€ä¸ªåºåˆ—æ˜¯å¦æ˜¯ä¸€ä¸ªäºŒå‰æ ‘çš„åŽåºéåŽ†;
+/*ä¸»è¦æ€æƒ³ï¼š è®¾ä¸€ä¸ªäºŒå‰æŸ¥æ‰¾æ ‘çš„åŽåºéåŽ†é¡ºåºæ˜¯   D E B F G C A ;
+	åˆ™æˆ‘ä»¬å¯ä»¥çŸ¥é“Aä¸ºè¿™æ£µæ ‘çš„ æ ¹ç»“ç‚¹  ä»ŽåŽåˆ°å‰è¿›è¡Œæ¯”è¾ƒå½“é‡åˆ°æ¯”Aå°çš„æ—¶å€™ ä¹‹åŽçš„ç‚¹å³ä¸ºAçš„å·¦å­æ ‘ï¼Œè¿›è¡Œé€’å½’è°ƒç”¨å³å¯;
 */
-
 int check(int a[],int start,int end){
 	if (start<=end){
 
@@ -13,14 +12,13 @@ int check(int a[],int start,int end){
 		{
 		}
 		
-		//i¼´ÎªÕâ¸öÐòÁÐµÄÇø·Öµã£¬½«Õû¸öÐòÁÐ·ÖÎªÁ½¸öÐòÁÐÆäÖÐ£¨start,i£©ÎªÐ¡ÓÚ¸ùµÄ²¿·Ö£¬£¨i+1,end£©Îª´óÓÚ¸ùµÄ²¿·Ö;
-	
+		//iå³ä¸ºè¿™ä¸ªåºåˆ—çš„åŒºåˆ†ç‚¹ï¼Œå°†æ•´ä¸ªåºåˆ—åˆ†ä¸ºä¸¤ä¸ªåºåˆ—å…¶ä¸­ï¼ˆstart,iï¼‰ä¸ºå°äºŽæ ¹çš„éƒ¨åˆ†ï¼Œï¼ˆi+1,endï¼‰ä¸ºå¤§äºŽæ ¹çš„éƒ¨åˆ†;
 		for (int j=i;j>=0;j--)
 		{
 			if (a[j]>a[end])
 			{
 				cout<<"no"<<endl;
-				return 0;//·µ»Ø0´ú±í²»ÊÇ;
+				return 0;//è¿”å›ž0ä»£è¡¨ä¸æ˜¯;
 			}
 		}
 		check(a,start,i);
@@ -28,7 +26,6 @@ int check(int a[],int start,int end){
 	}
 	return 1;
 }
-
 
 int  main(){
 
@@ -38,7 +35,6 @@ int  main(){
 	{
 		cout<<"yes"<<endl;
 	}
-
 
 	system("pause");
 	return 0;
