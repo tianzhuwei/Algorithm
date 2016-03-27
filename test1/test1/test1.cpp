@@ -29,8 +29,8 @@ int check(int a[],int start,int end){
 
 int  main(){
 
-	int a[7]={5,7,6,9,11,10,8};
-	int result=check(a,0,6);
+	int a[1]={5};
+	int result=check(a,0,0);
 	if (result==1)
 	{
 		cout<<"yes"<<endl;
