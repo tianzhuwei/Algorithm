@@ -7,13 +7,13 @@ int shuzhou(int ve[], int low ,int high){
 	srand((unsigned)time(NULL));
 	int random_num=rand()%(high-low)+low+1;
 
-	int tem =ve[low];
+	int tem=ve[low];
 	ve[low]=ve[random_num];
-	ve[random_num]=ve[low];
+	ve[random_num]=tem;
 
 	return ve[low];
 }
-void qucik_sort_origin(int ve[],int low,int high){
+void qucik_sort_random(int ve[],int low,int high){
 	if (low>=high)
 	{
 		return;
@@ -39,8 +39,8 @@ void qucik_sort_origin(int ve[],int low,int high){
 		}
 	}
 	ve[i]=pivot;
-	qucik_sort_origin(ve,low,i-1);
-	qucik_sort_origin(ve,i+1,high);
+	qucik_sort_random(ve,low,i-1);
+	qucik_sort_random(ve,i+1,high);
 }
 int main(){
 
@@ -51,26 +51,26 @@ int main(){
 	ve=new int[num];
 	srand((unsigned)time(NULL));
 	for (int i=0;i<num;++i)
-		ve[i]=rand();
+		ve[i]=rand()%100;
 	clock_t time1=clock();
-	qucik_sort_origin(ve,0,num-1);
+	qucik_sort_random(ve,0,num-1);
 	time1=clock()-time1;
 	cout<<"随机数组(一百万)耗时："<<time1<<"ms"<<endl;
 	clock_t time2=clock();
-	qucik_sort_origin(ve,0,num-1);
+	qucik_sort_random(ve,0,num-1);
 	time2=clock()-time2;
 	cout<<"升序数组(一百万)耗时："<<time2<<"ms"<<endl;
 
 	for (int i=0;i<num;++i)
 	{
-		ve[i]=i/2;
+		ve[i]=10;
 	}
 	clock_t time3 =clock();
-	qucik_sort_origin(ve,0,num-1);
+	qucik_sort_random(ve,0,num-1);
 	time3=clock()-time3;
 	cout<<"重复数组(一百万)耗时："<<time3<<"ms"<<endl;
 
- 
+
 	delete[] ve;
 	ve=NULL;
 
