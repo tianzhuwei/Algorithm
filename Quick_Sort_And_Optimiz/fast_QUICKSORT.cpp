@@ -60,7 +60,7 @@ void InsertSort(int *&ve,int low ,int high){
 		ve[i+1]=temp;
 	}
 }
-void static qucik_sort_MiddleOfThree_Insert(int ve[],int low,int high){
+void static qucik_sort_MiddleOfThree_Insert_Key(int ve[],int low,int high){
 	if (low<high)
 	{
 
@@ -68,12 +68,64 @@ void static qucik_sort_MiddleOfThree_Insert(int ve[],int low,int high){
 		{
 			InsertSort(ve,low,high);
 			return;
-		}else{
-			MidanOfThree(ve,low,high);
-			int i=Partition(ve,low,high);
-			qucik_sort_MiddleOfThree_Insert(ve,low,i-1);
-			qucik_sort_MiddleOfThree_Insert(ve,i+1,high);
 		}
+		MidanOfThree(ve,low,high);
+		//int i=Partition(ve,low,high);
+
+		//进行同key聚集;
+		//进行左右分组,并且将与key相同元素放到两边;
+		int first = low;
+		int last  = high;
+		int right =high;
+		int left  = low;
+		int leftlen= 0 ;
+		int rightlen = 0 ;
+		int key = ve[first];
+		while( first <last){
+			while( first<last && ve[last]>=key){
+				if (ve[last] == key)
+				{
+					change(ve[last],ve[right]);
+					right--;
+					rightlen++;
+				}
+				last--;
+			}
+			ve[first] = ve[last];
+			while (first<last && ve[first]<=key)
+			{
+				if (ve[first] == key)
+				{
+					change(ve[first],ve[left]);
+					left++;
+					leftlen++;
+				}
+				first++;
+			}
+			ve[last] = ve[first];
+		}
+		ve[first] = key;
+
+		//将两边与KEY相等的元素放到key两边;
+
+		int i = first-1;
+		int j = low;
+		while(j < left && ve[i] != key){
+			change(ve[i],ve[j]);
+			i--;
+			j++;
+		}
+		i=last+1;
+		j=high;
+		while(j>right && ve[i]!=key){
+			change(ve[i],ve[j]);
+			j--;
+			i++;
+		}
+
+		qucik_sort_MiddleOfThree_Insert_Key(ve,low,first-leftlen-1);
+		qucik_sort_MiddleOfThree_Insert_Key(ve,first+rightlen+1,high);
+		
 	}
 
 }
@@ -86,22 +138,22 @@ void putout(int ve[],int num){
 }
 int main(){
 
-	cout<<"以下运行结果是使用  三数取中+直接插入排序  快速排序思想进行优化！"<<endl;
+	cout<<"以下运行结果是使用  三数取中+直接插入排序+同key相聚  快速排序思想进行优化！"<<endl;
 	int * ve;
 	int num=1000000;//一百万的数据;
-	//int num=100;
+	//int num=10;
 	ve=new int[num];
 	srand((unsigned)time(NULL));
 	for (int i=0;i<num;++i)
 		ve[i]=rand();
 	clock_t time1=clock();
-	qucik_sort_MiddleOfThree_Insert(ve,0,num-1);
+	qucik_sort_MiddleOfThree_Insert_Key(ve,0,num-1);
 	time1=clock()-time1;
 	cout<<"随机数组(一百万)耗时："<<time1<<"ms"<<endl;
 	//		putout(ve,num);
 
 	clock_t time2=clock();
-	qucik_sort_MiddleOfThree_Insert(ve,0,num-1);
+	qucik_sort_MiddleOfThree_Insert_Key(ve,0,num-1);
 	time2=clock()-time2;
 	cout<<"升序数组(一百万)耗时："<<time2<<"ms"<<endl;
 	//		putout(ve,num);
@@ -131,7 +183,7 @@ int main(){
 		}
 	}
 	clock_t time3 =clock();
-	qucik_sort_MiddleOfThree_Insert(ve,0,num-1);
+	qucik_sort_MiddleOfThree_Insert_Key(ve,0,num-1);
 	time3=clock()-time3;
 	cout<<"重复数组(一百万)耗时："<<time3<<"ms"<<endl;
 

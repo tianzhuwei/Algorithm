@@ -1,44 +1,42 @@
 #include <iostream>
 #include <time.h>
-#include <algorithm>
-#include <vector>
 using namespace std;
 
 void qucik_sort_origin(int ve[],int low,int high){
-	if (low>=high)
+	if (low<high)
 	{
-		return;
-	}
-	int i=low;
-	int j=high;
-	int pivot=ve[i];
+		int i=low;
+		int j=high;
+		int pivot=ve[i];
 
-	while (i!=j)
-	{
-		while(ve[j]>pivot&&i<j) 
-			j--;
-		if (i<j)
+		while (i!=j)
 		{
-			ve[i]=ve[j];
-			i++;
+			while(ve[j]>=pivot&&i<j) 
+				j--;
+			if (i<j)
+			{
+				ve[i]=ve[j];
+				i++;
+			}
+			while(ve[i]<=pivot&&i<j)
+				i++;
+			if(i<j){
+				ve[j]=ve[i];
+				j--;
+			}
 		}
-		while(ve[i]<pivot&&i<j)
-			i++;
-		if(i<j){
-			ve[j]=ve[i];
-			j--;
-		}
+		ve[i]=pivot;
+		qucik_sort_origin(ve,low,i-1);
+		qucik_sort_origin(ve,i+1,high);
+	
 	}
-	ve[i]=pivot;
-	qucik_sort_origin(ve,low,i-1);
-	qucik_sort_origin(ve,i+1,high);
+
 }
 int main(){
 
-	cout<<"ÒÔÏÂÔËÐÐ½á¹ûÊÇÊ¹ÓÃ  Ô­Ê¼  ¿ìËÙÅÅÐòË¼ÏëÃ»ÓÐ½øÐÐÓÅ»¯£¡"<<endl;
+	cout<<"ä»¥ä¸‹è¿è¡Œç»“æžœæ˜¯ä½¿ç”¨  åŽŸå§‹  å¿«é€ŸæŽ’åºæ€æƒ³æ²¡æœ‰è¿›è¡Œä¼˜åŒ–ï¼"<<endl;
 	int * ve;
-	int num=1000000;//Ò»°ÙÍòµÄÊý¾Ý;
-	//int num=10;
+	int num=1000000;//ä¸€ç™¾ä¸‡çš„æ•°æ®;
 	ve=new int[num];
 	srand((unsigned)time(NULL));
 	for (int i=0;i<num;++i)
@@ -46,20 +44,43 @@ int main(){
 	clock_t time1=clock();
 	qucik_sort_origin(ve,0,num-1);
 	time1=clock()-time1;
-	cout<<"Ëæ»úÊý×é(Ò»°ÙÍò)ºÄÊ±£º"<<time1<<"ms"<<endl;
+
+	cout<<"éšæœºæ•°ç»„(ä¸€ç™¾ä¸‡)è€—æ—¶ï¼š"<<time1<<"ms"<<endl;
 	clock_t time2=clock();
 	qucik_sort_origin(ve,0,num-1);
 	time2=clock()-time2;
-	cout<<"ÉýÐòÊý×é(Ò»°ÙÍò)ºÄÊ±£º"<<time2<<"ms"<<endl;
+	cout<<"å‡åºæ•°ç»„(ä¸€ç™¾ä¸‡)è€—æ—¶ï¼š"<<time2<<"ms"<<endl;
 
 	for (int i=0;i<num;++i)
 	{
-		ve[i]=i/2;
+		if (i%7==0)
+		{
+			ve[i]=5;
+		}else if (i%7==1)
+		{
+			ve[i]=7;
+		}else if (i%7==2)
+		{
+			ve[i]=6;
+		}else if (i%7==3)
+		{
+			ve[i]=8;
+		}else if (i%7==4)
+		{
+			ve[i]=4;
+		}else if (i%7==5)
+		{
+			ve[i]=6;
+		}else if (i%7==6)
+		{
+			ve[i]=1;
+		}
+		//	cout<<ve[i]<<"  ";
 	}
 	clock_t time3 =clock();
 	qucik_sort_origin(ve,0,num-1);
 	time3=clock()-time3;
-	cout<<"ÖØ¸´Êý×é(Ò»°ÙÍò)ºÄÊ±£º"<<time3<<"ms"<<endl;
+	cout<<"é‡å¤æ•°ç»„(ä¸€ç™¾ä¸‡)è€—æ—¶ï¼š"<<time3<<"ms"<<endl;
 
 
 	delete[] ve;
