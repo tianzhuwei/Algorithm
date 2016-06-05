@@ -1,28 +1,14 @@
 #include<iostream>
-#include<vector>
 #include<algorithm>
 using namespace std;
-void InsertSort(int* arry,int start,int p) {
-	for (int i= start+1; i<= p; i++)
-	{
-		int te = arry[i];
-		int j = i;
-		while (arry[j] < arry[j - 1] && j > start)
-		{
-			arry[j] = arry[j - 1];
-			arry[j - 1] = te;
-			j--;
-		}
-		
-	}
-}
-int find_middle(int *arry, int left, int right){
+void InsertSort(int* arry, int start, int p);
+int find_middle(int *arry, int left, int right){//返回下标;
 	//5个元素为一组，对数组进行直接插入排序;
 	if ((right-left)<5)
 	{
 		InsertSort(arry, left, right);
 		int a = left + (right - left) / 2;
-		return arry[a];
+		return a;
 	}
 	else
 	{
@@ -48,20 +34,25 @@ int find_middle(int *arry, int left, int right){
 				InsertSort(arry, s, right);
 			}
 		}//for;
-		//int* new_arry = new int[groupNum];
-		vector<int>  new_arry;
+		int* new_arry = new int[groupNum];
 		for (int i = 0; i < groupNum-1; ++i)
 		{
-			//new_arry[i] = arry[5 * i + 2];
-			new_arry.push_back(arry[5 * i + 2]);
+			new_arry[i] = arry[left+5 * i + 2];
 		}
 		int m = (right - (groupNum - 1) * 5)/2;
-		//new_arry[groupNum - 1] = arry[5 * (groupNum-1) + m];
-		new_arry.push_back(arry[5 * (groupNum - 1) + m]);
-		//find_middle(new_arry, 0, groupNum);//再次寻找中位数;
+		//int m=(right - (groupNmu - 1 )*5);
+		new_arry[groupNum - 1] = arry[5 * (groupNum-1) + m];
 		//改成对新数组直接进行排序	;
-		sort(new_arry.begin(), new_arry.end()-1);
-		return new_arry[groupNum / 2];
+		sort(new_arry, new_arry+groupNum);
+		int aaa = new_arry[groupNum / 2];
+		delete[] new_arry;
+		for (int i = left; i <=right; i++)
+		{
+			if (aaa==arry[i])
+			{
+				return i;
+			}
+		}
 	}//else;
 }
 void change(int &a, int &b) {
@@ -75,35 +66,61 @@ int huafen(int*arry, int s,int e) {
 	for (int j = s; j < e; j++)
 	{
 		if (arry[j] <= p) {
-			i++;
-			change(arry[i],arry[j]);
+			change(arry[++i],arry[j]);
 		}
 	}//for;
-	change(arry[i + 1], arry[e]);
-	return i + 1;
+	change(arry[++i], arry[e]);
+	return i ;
 }
 int Select(int* arry ,int left,int right ,int pos ){
-	int middle = find_middle(arry,left,right);//求得中位数的中位数;
-	int i = left;
-	for (; i < right; i++)
+	if (left==right)
 	{
-		if (arry[i] == middle)
-			break;
+		cout << "The number is " << arry[left] << endl;
+		return arry[left];
 	}
-	change(arry[i], arry[right]);
+	int middle = find_middle(arry,left,right);//求得中位数的中位数的下标);
+	change(arry[middle], arry[right]);
 	//按照找到的中位数对数组进行划分（类似快排的划分）;
-	int m=	huafen(arry, left,right);//m为划分元素所在的位置;
-	if (m==pos)
+	//int m=	huafen(arry, left,right);//m为划分元素所在的位置;
+	int low = left, high = right;
+	int i = low, j = high;
+	int left_mark = low - 1, right_mark = high + 1;
+	int temp = arry[high];
+
+	int ll = low - 1;
+	int m = low;
+	for (; m<high; ++m)
 	{
-		cout << "第" << pos << "个数为" << arry[m] << endl;
+		if (arry[m] <= temp)
+		{
+			change(arry[m], arry[++ll]);
+			if (arry[ll] == temp)
+			{
+				change(arry[++left_mark], arry[ll]);
+			}
+		}
+	}
+	change(arry[++ll], arry[high]);
+	//ll为枢轴的位置
+	int aa = low;
+	j = ll;
+	while (aa <= left_mark)
+	{
+		change(arry[aa++], arry[--ll]);
+	}
+	i = ll;
+
+	if (pos>=i&&pos<=j)
+	{
+		cout << "The number is " << arry[pos] << endl;
 		return arry[m] ;
 	}
-	else if (m>pos)
+	else if (i>pos)
 	{
-		 Select(arry, left, m - 1, pos);
+		 Select(arry, left, i - 1, pos);
 	}
 	else
 	{
-		 Select(arry, m + 1, right,pos);
+		 Select(arry, j + 1, right,pos);
 	}
 }

@@ -3,8 +3,8 @@
 #include<string>
 using namespace std;
 void readfile(int*arry){
-	//string filename= "E:\\random1.txt";
-	string filename = "E:\\raise.txt";
+	string filename= "E:\\random1.txt";
+	//string filename = "E:\\raise.txt";
 	//string filename = "E:\\repeat.txt";
 	ifstream readtxt(filename);
 	if (!readtxt)
