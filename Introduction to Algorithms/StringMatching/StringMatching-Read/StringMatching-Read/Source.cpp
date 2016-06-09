@@ -1,9 +1,11 @@
 #include"general.h"
 void PuSu_match(char* buffer,char* p);
+void KMP(char* buffer, char* p);
+
 int main() {
 	clock_t time = clock();
-	ifstream DNA("E:\\DNA.txt");
-	//ifstream DNA("E:\\test.txt");
+	//ifstream DNA("E:\\DNA.txt");
+	ifstream DNA("E:\\test.txt");
 	if (!DNA)
 	{
 		cout << "Can not open the file!" << endl;
@@ -31,8 +33,9 @@ int main() {
 	time = clock() - time;
 	cout << "Read Use time is " << time << endl;
 	
-	char* p="TCTCCTTTTGGCTCTTTTTTGTTTTGTTTTCTGTCTTGCTCTTCAATGA";	
+	char* p="111";	
 	//PuSu_match(buffer, p);
+	KMP(buffer, p);
 	delete[] buffer;
 	system("pause");
   	return 0;
