@@ -1,11 +1,12 @@
 #include"general.h"
 void PuSu_match(char* buffer,char* p);
 void KMP(char* buffer, char* p);
-
+void BM(char* buffer, char* p);
+void Sunday(char* buffer, char * p);
 int main() {
 	clock_t time = clock();
-	//ifstream DNA("E:\\DNA.txt");
-	ifstream DNA("E:\\test.txt");
+	ifstream DNA("E:\\DNA.txt");
+	//ifstream DNA("E:\\test.txt");
 	if (!DNA)
 	{
 		cout << "Can not open the file!" << endl;
@@ -31,11 +32,17 @@ int main() {
 	}
 	DNA.close();
 	time = clock() - time;
-	cout << "Read Use time is " << time << endl;
-	
-	char* p="111";	
+	cout << "Read Use time is " << time <<" ms"<< endl;
+
+	time = clock();
+	//char* p = "11";
+	char* p="TAGCTTCTGATCTG";	
 	//PuSu_match(buffer, p);
-	KMP(buffer, p);
+	//KMP(buffer, p);
+	BM(buffer, p);
+	//Sunday(buffer, p);
+	time = clock() - time;
+	cout << "String Matched use time " << time << "ms" << endl;
 	delete[] buffer;
 	system("pause");
   	return 0;
