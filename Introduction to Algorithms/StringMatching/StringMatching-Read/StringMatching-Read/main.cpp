@@ -3,6 +3,7 @@ void PuSu_match(char* buffer,char* p);
 void KMP(char* buffer, char* p);
 void BM(char* buffer, char* p);
 void Sunday(char* buffer, char * p);
+#include<string>
 int main() {
 	clock_t time = clock();
 	ifstream DNA("E:\\DNA.txt");
@@ -33,6 +34,10 @@ int main() {
 	DNA.close();
 	time = clock() - time;
 	cout << "Read Use time is " << time <<" ms"<< endl;
+
+// char* a ;
+//	string a;
+//	getline(DNA, a);
 
 	time = clock();
 	//char* p = "11";
