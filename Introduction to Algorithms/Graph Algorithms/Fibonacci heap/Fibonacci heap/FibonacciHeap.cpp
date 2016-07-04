@@ -1,23 +1,25 @@
 #include "FibonacciHeap.h"
 
-FibonacciHeap_Head FibonacciHeap::Make_Heap() {//初始化一个空的 堆;
-	FibonacciHeap_Head a;
-	a.min = NULL;
-	a.n = 0;
+FibonacciHeap_Head* FibonacciHeap::Make_Heap() {//初始化一个空的 堆;
+	FibonacciHeap_Head* a=new FibonacciHeap_Head;
+	a->min = NULL;
+	a->n = 0;
 	return a;
 }
-void  FibonacciHeap::Insert(FibonacciHeap_Head *H, int x) {//将 x 结点插入 H ;
+void  FibonacciHeap::Insert(FibonacciHeap_Head *H, node* x) {//将 x 结点插入 H ;
 	H->n++;
+
 	node* temp=H->min;
-	node* x_temp = new node;
-	x_temp->child = NULL;
+	node* x_temp;// = new node;
+	/*	x_temp->child = NULL;
 	x_temp->parent = NULL;
 	x_temp->pre = NULL;
 	x_temp->next = NULL;
 	x_temp->key = x;
 	x_temp->mark = true;
 	x_temp->degree = 0;
-
+	*/
+	x_temp = x;
 	if (temp==NULL)//如果H指向的为空;
 	{
 		H->min = x_temp;
@@ -59,11 +61,78 @@ FibonacciHeap_Head* FibonacciHeap::Union(FibonacciHeap_Head* H1, FibonacciHeap_H
 	return New_H;
 }
 
+void FibonacciHeap::swap(node* a, node* b) {
+	node* a_pre = a->pre;
+	node* a_next = a->next;
+	node* b_pre = b->pre;
+	node* b_next = b->next;
+
+	a_pre->next = b;
+	b->pre = a_pre;
+	b->next = a_next;
+	a_next->pre = b;
+
+	b_pre->next = a;
+	a->pre = b_pre;
+	a->next = b_next;
+	b_next->pre = a;
+}
+
+void FibonacciHeap::Heap_Link(node* small, node* big) {
+	big->pre->next = big->next;
+	big->next->pre = big->pre;
+
+	node* child_temp = small->child;
+	small->child = big;
+	child_temp->pre->next = big;
+	big->pre = child_temp->pre;
+	big->next = child_temp;
+	child_temp->pre = big;
+}
+
 void FibonacciHeap::Consolidate(FibonacciHeap_Head*H) {
 	int d = log10(H->n)/(log10(1 + sqrt(5)));
 	node* *A=new node*[d];
 	for (int i = 0; i < d; ++i)
 		A[i] = NULL;
+	
+	node* temp = H->min;
+	A[temp->degree] = temp;
+	while (temp->next!=temp)
+	{
+		temp = temp->next;
+		int du = temp->degree;
+		while (A[d]!=NULL)
+		{
+			node *sameDegree = A[du];
+			if (sameDegree->key < temp->key)
+			{
+				swap(sameDegree, temp);
+			}
+			Heap_Link(temp, sameDegree);
+			A[du] = NULL;
+		}
+		A[++du] = temp;
+	}
+	H = Make_Heap();
+	int aa = 0;
+	for (int i = 0; i < d; i++)
+	{
+		if (A[i]!=NULL&&aa==0)
+		{
+			Insert(H, A[i]);
+			H->min = A[i];
+		}
+		else
+		{
+			Insert(H, A[i]);
+			if (H->min->key > A[i]->key)
+			{
+				H->min = A[i];
+			}
+		}
+	}
+
 }
 
 node* FibonacciHeap::Extract_Min(FibonacciHeap_Head* H) {//删除最小关键字，并返回该指针;

@@ -25,8 +25,8 @@ public:
 	//FibonacciHeap_Head H;//FibonacciHeap 可以有，也可以没有，先注释
 	
 public:
-	FibonacciHeap_Head Make_Heap();//初始化一个空的 堆;
-	void Insert(FibonacciHeap_Head *H,int x);//将 x 结点插入 H ;
+	FibonacciHeap_Head* Make_Heap();//初始化一个空的 堆;
+	void Insert(FibonacciHeap_Head *H,node* x);//将 x 结点插入 H ;
 	node* Minimum(FibonacciHeap_Head *H);//返回指向最小结点的指针;
 	node* Extract_Min(FibonacciHeap_Head* H);//删除最小关键字，并返回该指针;
 	FibonacciHeap_Head* Union(FibonacciHeap_Head* H1, FibonacciHeap_Head* H2);
@@ -35,6 +35,8 @@ public:
 
 private:
 	void Consolidate(FibonacciHeap_Head* H);
+	void swap(node* a,node* b);
+	void Heap_Link(node* small,node* big);
 private:
 
 };
