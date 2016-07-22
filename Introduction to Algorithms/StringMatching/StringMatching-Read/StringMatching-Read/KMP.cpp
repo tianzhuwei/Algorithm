@@ -16,6 +16,7 @@ int* Compute_Prefix_Function(char* p) {
 	return next;
 }
 void KMP(char* buffer, char* p) {
+	int count = 0;
 	int buffer_length = strlen(buffer);
 	int p_length = strlen(p);
 	int* next = Compute_Prefix_Function(p);//next[i]中存储的值表示有 （i+1）个字符的时候最大公共前后缀是多少;
@@ -32,8 +33,9 @@ void KMP(char* buffer, char* p) {
 		}
 		if (q==p_length)
 		{
-			cout << "Pattern occurs with shift " << i - p_length+1 << endl;
+//			cout << "Pattern occurs with shift " << i - p_length+1 << endl;
 			q = next[q-1];
 		}
 	}//for
+	cout << "Kmp : number is " << count << endl;
 }

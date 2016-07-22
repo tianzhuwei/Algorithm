@@ -5,7 +5,7 @@
 #include<time.h>
 using namespace std;
 
-//有一个更好的写法，过后更
+
 void swap(int& a, int& b) {
 	int temp = a;
 	a = b;

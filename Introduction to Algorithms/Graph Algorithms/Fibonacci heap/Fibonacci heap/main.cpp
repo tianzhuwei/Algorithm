@@ -1,22 +1,26 @@
 #include"FibonacciHeap.h"
-
+#include<fstream>
+#include<time.h>
 int main() {
 	FibonacciHeap test;
+	clock_t time = clock();
 	FibonacciHeap_Head* head =test.Make_Heap();
-
-	for (int i = 0; i < 10; i++)
+	fstream readfile("E:\\repeat.txt");
+	node* t = new node;
+	while (!readfile.eof())
 	{
-		node* t = new node;
-		t->child = NULL;
-		t->degree = 0;
-		t->key = rand();
-		t->next = NULL;
-		t->pre = NULL;
-		t->parent = NULL;
-		test.Insert(head,t );
+		readfile>>t->key;
+		test.Insert(head, t);
 	}
-	cout << test.Minimum(head) << endl;;
-
+	//cout << "Init time " << clock() - time <<"MS"<<endl;
+	//
+	//time = clock();
+	//while (head!=NULL)
+	//{
+	//	test.Extract_Min(head);
+	//}
+	test.Minimum(head);
+	cout << "Use time " << clock() - time << "MS" << endl;
 	system("pause");
 	return 0;
 }

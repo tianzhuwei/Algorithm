@@ -12,6 +12,7 @@ void IsInP(char* p, int * arr) {
 	}
 }
 void Sunday(char* buffer, char* p) {
+	int count = 0;
 	int i = 0, j = 0;//i用来指示buffer文本当前操作的字符位置，j用来指示模式当前操作的字符位置;
 	int temp = 0;
 	int b_length = strlen(buffer);
@@ -25,7 +26,7 @@ void Sunday(char* buffer, char* p) {
 		{
 			if (j==p_length-1)
 			{
-				cout << "shift " << i+1-p_length << endl;
+//				cout << "shift " << i+1-p_length << endl;
 				j = 0;
 				i++;
 				continue;
@@ -53,4 +54,5 @@ void Sunday(char* buffer, char* p) {
 			}
 		}
 	}
+	cout << "Sunday : number is " << count << endl;
 }

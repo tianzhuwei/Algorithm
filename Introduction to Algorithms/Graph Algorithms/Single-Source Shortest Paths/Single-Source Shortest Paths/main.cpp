@@ -1,9 +1,9 @@
 #include"Graph.h"
-int mainS() {
+int main() {
 	Graph test;
 	clock_t time = clock();
-	//test.BellmanFord();
-	test.Dijkstra();
+	test.BellmanFord();
+	//test.Dijkstra();
 	time = clock() - time;
 	cout << "The end ! Use time " << time << " ms" << endl;
 	system("pause");

@@ -1,8 +1,11 @@
 #include "Graph.h"
 
 void Graph::readfile() {
-	//string filename="E:\\new_data\\weightest.txt";
-	string filename = "E:\\new_data\\OLRoad.txt";
+	//string filename = "E:\\new_data\\NorthRoad.txt";
+	//string filename="E:\\new_data\\San.txt";
+	//string filename = "E:\\new_data\\OLRoad.txt";
+	//string filename = "E:\\new_data\\TGRoad.txt";
+	string filename = "E:\\new_data\\California.txt";
 	ifstream readfile(filename);
 	if (!readfile)
 	{
@@ -151,15 +154,15 @@ void Graph::BellmanFord() {
 	int path = 100;
 //cout << "输入目标点 " << endl;
 //	cin >> path;
-	while (S!=pre[path])
-	{
-		cout << path << " ";
-		path = pre[path];
-	}
-	if (S==pre[path])
-	{
-		cout << S << " ";
-	}
+	//while (S!=pre[path])
+	//{
+	//	cout << path << " ";
+	//	path = pre[path];
+	//}
+	//if (S==pre[path])
+	//{
+	//	cout << S << " ";
+	//}
 }
 
 

@@ -41,13 +41,19 @@ int main() {
 
 	time = clock();
 	//char* p = "11";
-	char* p="TAGCTTCTGATCTG";	
-	//PuSu_match(buffer, p);
-	//KMP(buffer, p);
-	BM(buffer, p);
-	//Sunday(buffer, p);
+	char* p="CGGGCC";
+	PuSu_match(buffer, p);
+	KMP(buffer, p);
 	time = clock() - time;
-	cout << "String Matched use time " << time << "ms" << endl;
+	cout << "String Matched use time  KM " << time << "ms" << endl;
+	time = clock();
+	BM(buffer, p);
+	time = clock() - time;
+	cout << "String Matched use time BM " << time << "ms" << endl;
+	time = clock();
+	Sunday(buffer, p);
+	time = clock() - time;
+	cout << "String Matched use time Sunday " << time << "ms" << endl;
 	delete[] buffer;
 	system("pause");
   	return 0;

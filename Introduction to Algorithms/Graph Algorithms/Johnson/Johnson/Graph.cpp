@@ -151,15 +151,15 @@ void Graph::BellmanFord(int S) {
 	int path = 100;
 //cout << "输入目标点 " << endl;
 //	cin >> path;
-	while (S!=pre[path])
-	{
-		cout << path << " ";
-		path = pre[path];
-	}
-	if (S==pre[path])
-	{
-		cout << S << " ";
-	}
+	//while (S!=pre[path])
+	//{
+	//	cout << path << " ";
+	//	path = pre[path];
+	//}
+	//if (S==pre[path])
+	//{
+	//	cout << S << " ";
+	//}
 }
 
 void Graph::Johnson() {

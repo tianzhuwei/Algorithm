@@ -13,6 +13,14 @@ struct node
 	node* next;//结点后指针；
 	int key;//关键字的值;
 	int degree;
+	node() {
+		this->child = NULL;
+		this->degree = 0;
+		this->next = NULL;
+		this->pre = NULL;
+		this->parent = NULL;
+
+	}
 };
 struct FibonacciHeap_Head
 {

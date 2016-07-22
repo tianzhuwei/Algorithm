@@ -4,7 +4,7 @@ node* Trie::MakeTrie() {
 	return t;
 }
 
-node* Trie::search(node* T, char* a) {
+node* Trie::search(node* T, const char* a) {
 	int i = 0;
 	node* temp = T;
 
@@ -22,7 +22,7 @@ node* Trie::search(node* T, char* a) {
 	}//while	;
 	if (temp->mark)
 	{
-		cout << "have the words! " << endl;
+		//cout << "have the words! " << endl;
 		return temp;
 	}
 	else
@@ -32,7 +32,7 @@ node* Trie::search(node* T, char* a) {
 	}
 }
 
-void Trie::Delete(node* T, char* a) {
+void Trie::Delete(node* T,const char* a) {
 	int i = 0;
 	node* temp = T;
 	temp = search(T, a);
@@ -42,7 +42,7 @@ void Trie::Delete(node* T, char* a) {
 	}
 	else {
 		temp->mark = false;
-		cout << "Delete success ! " << endl;
+		//cout << "Delete success ! " << endl;
 	}
 
 }

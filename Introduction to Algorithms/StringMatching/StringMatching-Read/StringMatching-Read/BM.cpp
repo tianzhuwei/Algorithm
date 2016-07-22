@@ -56,6 +56,7 @@ void preBmGs(char* p, int* suff,int * bmGs) {
 	}
 }
 void BM(char* buffer, char* p) {
+	int count = 0;
 	int* bmbc = new int[128];//用来表示p中的某个字符所在位置的下标;
 	memset(bmbc, -1, 128 * sizeof(int));//全部初始化为-1;
 	PreBmBc(p, bmbc);
@@ -73,9 +74,10 @@ void BM(char* buffer, char* p) {
 		for (j=p_length-1; j >= 0 && buffer[i + j] == p[j]; --j);
 		if (j<0)
 		{
-			cout << "shift " << i << endl;
+//			cout << "shift " << i << endl;
 			//i +=bmGs[0];
 			i += p_length;
+			count++;
 		}
 		else
 		{
@@ -87,6 +89,7 @@ void BM(char* buffer, char* p) {
 			}
 		}
 	}
+	cout << "Number is " << count << endl;
 /*
 	while (i<b_length-p_length)
 	{

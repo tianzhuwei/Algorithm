@@ -25,8 +25,8 @@ class Trie
 public:
 	node* MakeTrie();//初始化一棵字典树;
 	void Insert(node* T,const char* a);//添加一个字符串;
-	void Delete(node* T, char* a);//删除一个字符串;
-	node* search(node* T, char* a);
+	void Delete(node* T,const char* a);//删除一个字符串;
+	node* search(node* T, const char* a);
 	Trie();
 	~Trie();
 };

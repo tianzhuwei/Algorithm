@@ -2,7 +2,7 @@
 
 void Graph::Init() 
 {
-	fstream readfile("E:\\最大流数据集\\5.txt");
+	fstream readfile("E:\\最大流数据集\\2.txt");
 	if (!readfile)
 	{
 		cout << "Can not open the file !" << endl;

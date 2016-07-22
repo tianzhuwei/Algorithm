@@ -28,8 +28,8 @@ int main(){
 		{
 			aa--;
 			clock_t time = clock();
-			//Randomized_select(0, num - 1, arry, aa);
-			int a=Select(arry,0,num-1,aa);
+			Randomized_select(0, num - 1, arry, aa);
+			//int a=Select(arry,0,num-1,aa);
 			time = clock() - time;
 			cout << "use time " << time << endl;
 			for (int i = 0; i < num; i++)
