@@ -26,9 +26,9 @@ void Sunday(char* buffer, char* p) {
 		{
 			if (j==p_length-1)
 			{
-//				cout << "shift " << i+1-p_length << endl;
+				count++;
 				j = 0;
-				i++;
+				i=i-p_length+2;
 				continue;
 			}
 			i++;
@@ -37,15 +37,16 @@ void Sunday(char* buffer, char* p) {
 		else
 		{
 			temp = i + p_length - j;
-			//如果buffer[temp]出现在模式p中，则与最端的对齐
-			if (temp>strlen(buffer))
+			//如果buffer[temp]出现在模式p中，则与最右端的对齐
+			if (temp>b_length)
 			{
 				break;
 			}
-			if (arry1[buffer[temp]]!=-1)
+			char a = buffer[temp];
+			if (arry1[a]!=-1)
 			{
+				i = temp - arry1[a];
 				j = 0;
-				i = temp - arry1[buffer[temp]];
 			}
 			else
 			{

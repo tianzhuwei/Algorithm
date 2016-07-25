@@ -225,7 +225,7 @@ void bPlus::deletekey(int key) {
 				leavesUnion(brother, deleteNode);
 				if (brother->parent->key->size()<min)//小于min了，应该怎么办！！写呗;
 				{
-					Union(brother->parent);
+						Union(brother->parent);
 				}
 			}
 			else//是下兄弟;
@@ -233,7 +233,7 @@ void bPlus::deletekey(int key) {
 				leavesUnion(deleteNode, brother);
 				if (deleteNode->parent->key->size()<min)//小于min了，应该怎么办！！写呗;
 				{
-					Union(deleteNode->parent);
+						Union(deleteNode->parent);					
 				}
 			}//else;
 		}//else;
@@ -292,6 +292,15 @@ Node*  bPlus::search(int key) {
 
 void bPlus::Union(Node* node) {          //问题
 	//找到 node 结点的兄弟结点合并;
+	if ((node->parent) == NULL)
+	{
+		for (int i = 0; i < node->key->size(); i++)
+			node->child->at(i)->parent = NULL;
+		
+		head = head->child->at(0);
+		delete node;
+		return;
+	}
 	Node* brother;
 	if (node->parent->child->back()==node)//;
 	{
@@ -339,6 +348,11 @@ void bPlus::Union(Node* node) {          //问题
 		{
 			node->key->insert(node->key->end(), brother->key->begin(), brother->key->end());
 			node->child->insert(node->child->end(), brother->child->begin(), brother->child->end());
+			node->next = brother->next;
+			if (brother->next!=NULL)
+			{
+				brother->next->pre = node;
+			}
 			for (int i = 0; i < brother->key->size(); i++)
 				brother->child->at(i)->parent = node;
 			delete brother;

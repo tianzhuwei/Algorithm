@@ -6,7 +6,7 @@ void Sunday(char* buffer, char * p);
 #include<string>
 int main() {
 	clock_t time = clock();
-	ifstream DNA("E:\\DNA.txt");
+	ifstream DNA("E:\\Êý¾Ý¼¯\\DNA.txt");
 	//ifstream DNA("E:\\test.txt");
 	if (!DNA)
 	{
@@ -41,19 +41,20 @@ int main() {
 
 	time = clock();
 	//char* p = "11";
-	char* p="CGGGCC";
+//buffer = "aaaaa";
+	//char* p="aa";
+	char* p = "GTGCTGACACATCCA";
 	PuSu_match(buffer, p);
 	KMP(buffer, p);
-	time = clock() - time;
-	cout << "String Matched use time  KM " << time << "ms" << endl;
+	cout << "KMP  Matched use time   " << time << "ms" << endl;
 	time = clock();
 	BM(buffer, p);
 	time = clock() - time;
-	cout << "String Matched use time BM " << time << "ms" << endl;
+	cout << "BM  Matched use time  " << time << "ms" << endl;
 	time = clock();
 	Sunday(buffer, p);
 	time = clock() - time;
-	cout << "String Matched use time Sunday " << time << "ms" << endl;
+	cout << "Sunday Matched use time  " << time << "ms" << endl;
 	delete[] buffer;
 	system("pause");
   	return 0;

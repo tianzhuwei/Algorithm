@@ -9,12 +9,12 @@ int iMin = 1;
 int iMax = RAND_MAX;
 //void readfile(int* ve) {
 void readfile(vector<int> & ve){
-	//ifstream myread("../small.txt");
-	ifstream myread("../large.txt");
+	//ifstream myread("E:\\mid.txt");
+	ifstream myread("E:\\large.txt");
 	if (!myread)
 	{
 		cout << "Can Not Open The File!!!" << endl;
-		//system("pause");
+		system("pause");
 		exit(0);
 	}
 
@@ -122,37 +122,37 @@ void InsertSegmentTree(SegmentTreeNode* Seg_Arr,int root,int left,int right) {
 }
 
 //1   处理某一个数据的时候会出现溢出的问题，暂时没有发现是哪里的问题，   yuanmo  发现的问题 
-void InsertSegmentTree1(SegmentTreeNode* Seg_Arr, int root, int left, int right) {
-	//if (root>2 * (iMax - iMin) + 1)
-	//{
-	//	return;
-	//}
-	if (Seg_Arr[root].left>=left&&Seg_Arr[root].right<=right)
-	{
-		Seg_Arr[root].cover++;
-		return;
-	}
-	if (left<= (Seg_Arr[root].left + Seg_Arr[root].right) / 2 && (Seg_Arr[root].left + Seg_Arr[root].right) / 2<right)
-	{
-		InsertSegmentTree1(Seg_Arr, 2 * root + 1, left, (Seg_Arr[root].left + Seg_Arr[root].right) / 2);
-		InsertSegmentTree1(Seg_Arr, 2 * root + 2,  (Seg_Arr[root].left + Seg_Arr[root].right) / 2+1,right);
-	}
-	if (right<= (Seg_Arr[root].left + Seg_Arr[root].right) / 2)
-	{
-		InsertSegmentTree1(Seg_Arr, 2 * root + 1, left, right);
-	}
-	if (left>(Seg_Arr[root].left + Seg_Arr[root].right) / 2)
-	{
-		InsertSegmentTree1(Seg_Arr, 2 * root + 2, left, right);
-	}
-}
+//void InsertSegmentTree1(SegmentTreeNode* Seg_Arr, int root, int left, int right) {
+//	//if (root>2 * (iMax - iMin) + 1)
+//	//{
+//	//	return;
+//	//}
+//	if (Seg_Arr[root].left>=left&&Seg_Arr[root].right<=right)
+//	{
+//		Seg_Arr[root].cover++;
+//		return;
+//	}
+//	if (left<= (Seg_Arr[root].left + Seg_Arr[root].right) / 2 && (Seg_Arr[root].left + Seg_Arr[root].right) / 2<right)
+//	{
+//		InsertSegmentTree1(Seg_Arr, 2 * root + 1, left, (Seg_Arr[root].left + Seg_Arr[root].right) / 2);
+//		InsertSegmentTree1(Seg_Arr, 2 * root + 2,  (Seg_Arr[root].left + Seg_Arr[root].right) / 2+1,right);
+//	}
+//	if (right<= (Seg_Arr[root].left + Seg_Arr[root].right) / 2)
+//	{
+//		InsertSegmentTree1(Seg_Arr, 2 * root + 1, left, right);
+//	}
+//	if (left>(Seg_Arr[root].left + Seg_Arr[root].right) / 2)
+//	{
+//		InsertSegmentTree1(Seg_Arr, 2 * root + 2, left, right);
+//	}
+//}
 
 int main() {
 	clock_t time = clock();
 //	int iMax = 10;
 	SegmentTreeNode * Seg_Arr = new SegmentTreeNode[2 * (iMax - iMin)+1];
 	InitSegmentTree(iMin, iMax, Seg_Arr, 0);
-	cout << iMin << "到" << iMax << "之间的线段树创建成功" << endl;
+//	cout << iMin << "到" << iMax << "之间的线段树创建成功" << endl;
 	vector<int> ve;
 	vector<int>::iterator ve_iterator = ve.begin();
 	readfile(ve);

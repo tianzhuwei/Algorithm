@@ -4,6 +4,11 @@
 i注意：
 当我写下这个 代码的时候我毕不理解！！！！！！！！！！
 脑子已经进水
+
+所以出错了
+
+2013-7-24
+修复
 */
 
 void PreBmBc(char*p,int* bmbc ) {
@@ -74,8 +79,6 @@ void BM(char* buffer, char* p) {
 		for (j=p_length-1; j >= 0 && buffer[i + j] == p[j]; --j);
 		if (j<0)
 		{
-//			cout << "shift " << i << endl;
-			//i +=bmGs[0];
 			i += p_length;
 			count++;
 		}
@@ -90,41 +93,5 @@ void BM(char* buffer, char* p) {
 		}
 	}
 	cout << "Number is " << count << endl;
-/*
-	while (i<b_length-p_length)
-	{
-		temp = i + p_length-1;
-		while (p[j]==buffer[temp]&&j>=0&&temp>=0)
-		{
-			temp--;
-			j--;
-		}
-		if (j==0)
-		{
-			cout << "shift " << temp << endl;
-			j = p_length;
-			i += p_length;
-		}
-		else
-		{
-			if (bmbc[buffer[temp]]!=-1)//利用坏字符规则来计算  i  应该在的位置;   开始
-			{
-				i = temp - bmbc[buffer[temp]];
-				j = p_length - 1;
-			}//利用坏字符规则来计算  i  应该在的位置;   结束
-			else
-			{
-				i = temp + 1;
-				j = p_length - 1;
-			}
-			//下面我们利用好后缀的规则来计算得出  i  应该在的位置     开始;
-			//标记数组已经写出来  bmGs[ ]
-			if (bmGs[temp]>i)
-			{
-				i = bmGs[i];
-			}
-			//好后缀规则    结束;
-		}//else
-	}
-	*/
+
 }

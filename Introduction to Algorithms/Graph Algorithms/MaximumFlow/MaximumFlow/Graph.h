@@ -40,5 +40,8 @@ private:
 	int ifend();//判断link表中是否有残存的流量，没有返回-1，否则返回 下标;
 private:
 	void Init();
+	void fenfaliuliang(int i);//将i号结点的流量，发放到相邻的结点中去;
+	void Relable(int i);//对i号结点重新设置高度,新的高度为最低高度加1;
+	void Push(int st,EdgeNode* edge);//从st 顶点进行推送;
 };
 

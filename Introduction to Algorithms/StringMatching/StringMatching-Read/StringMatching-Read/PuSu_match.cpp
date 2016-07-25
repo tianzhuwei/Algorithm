@@ -27,10 +27,10 @@ void PuSu_match(char* buffer, char* p) {
 		else
 		{
 			count++;
-			cout << i << endl;
+			//cout << i << endl;
 		}
 	}//for
 	time = clock() - time;
-	cout << "total " << count << endl;
+	cout << "PuSu_match :total " << count << endl;
 	cout << "PuSu_match end ! use time "<<time <<"ms"<< endl;
 };
