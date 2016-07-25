@@ -6,7 +6,8 @@
 *.sdf
 *.vcxproj
 *.filters
-
+*.db
+*.pdb
 
 
 # User-specific files
