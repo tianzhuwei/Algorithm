@@ -5,10 +5,11 @@ using namespace std;
 
 struct Rectangle//注意一下拷贝函数的问题;！！！！！！！！！！！！！！！！！！！！！！！！！！！！
 {
-	int leftPoint_x;
-	int leftPoint_y;
-	int rightPoint_x;
-	int rightPoint_y;
+	//我使用的是两个点来表示一个矩形    左下点和右上点
+	double leftPoint_x;
+	double leftPoint_y;
+	double rightPoint_x;
+	double rightPoint_y;
 	Rectangle() {
 		leftPoint_x = 0;
 		leftPoint_y = 0;
@@ -22,7 +23,8 @@ struct childNode
 {
 	Rectangle region;
 	Node* child;
-	childNode() {
+	childNode() 
+	{
 		child = NULL;
 	}
 };
@@ -50,8 +52,8 @@ public:
 	~RTree();
 private:
 	Node* ChooseLeaf(Rectangle re);//返回要插入的叶子结点;
-	inline int areaIncrease(Rectangle r1,Rectangle r2);//当r1 添加上 r2 时面积增加多少;
-	inline int area_compute(Rectangle r1, Rectangle r2);//计算r1 和r2 两个矩形构成的MBR的面积;
+	inline double areaIncrease(Rectangle r1,Rectangle r2);//当r1 添加上 r2 时面积增加多少;
+	inline double area_compute(Rectangle r1, Rectangle r2);//计算r1 和r2 两个矩形构成的MBR的面积;
 	inline void changeRegion(Rectangle& r1 ,Rectangle r2);//当添加r2后，修改r1的 region 域;
 	void splitNode(Node* node);
 	inline bool RectangleEqual(Rectangle r1, Rectangle r2);
