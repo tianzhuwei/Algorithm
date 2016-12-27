@@ -4,7 +4,7 @@
 int main() {
 
 	//fstream readfile("E:\\test.txt");
-	fstream readfile("DNA.txt");
+	fstream readfile("250.txt");
 	while (!readfile)
 	{
 		cout << "Can not open the file !" << endl;

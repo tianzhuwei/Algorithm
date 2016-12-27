@@ -7,8 +7,8 @@ int main()
 	RTree test;
 	Rectangle re;
 	int number=0;//用来检查插入的数据个数；
-	ifstream readfile("E:\\RTreeData\\CArdline.fnl");
-	//ifstream readfile("E:\\RTreeData\\NArdline.fnl");
+	//ifstream readfile("E:\\RTreeData\\CArdline.fnl");
+	ifstream readfile("E:\\RTreeData\\NArdline.fnl");
 	//ifstream readfile("E:\\RTreeData\\CDrdline.fnl");
 	if (!readfile)
 	{

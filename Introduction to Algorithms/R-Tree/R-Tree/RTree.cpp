@@ -233,6 +233,64 @@ void RTree::updateRegion(Node* node)// µ±Ò»¸öÇøÓò´óÐ¡¸Ä±äÖ®ºó£¬ÒÀ´Î¸üÐÂ¸¸Ç×½áµãµ
 	}
 }
 
+void RTree::Condense(Node * LeafNode)
+{
+	if (LeafNode->child.size()<m)//Èç¹ûµ±Ç°½áµãº¢×Ó¸öÊýÐ¡ÓÚÁË m ;
+	{
+		if (LeafNode==Root)//Èç¹ûÕâ¸öLeafNode ÊÇ¸ù½áµã£¬ÒªÖ´ÐÐÐÂµÄÅÐ¶Ï±ê×¼;
+		{
+
+		}//if
+		else//·Ç¸ù½áµã£¬ÇÒº¢×Ó¸öÊýÒªÐ¡ÓÚ m £¬Ôò½« LeafNode½áµã¼ÓÈëÒ»¸öÕ»QÖÐ;
+		{
+			Q.push(LeafNode);//½øÈëÕ»Q £¬ÇÒÉ¾³ýÔÚ¸¸Ç×½áµãÖÐµÄÎ»ÖÃ;
+			int i = 0;
+			Node* parent = LeafNode->parent;
+			while (parent->child[i].child!=LeafNode)
+			{
+				i++;
+			}
+			parent->child.erase(parent->child.begin()+i);
+
+			Condense(parent);//ÒòÎªLeafNode²»ÊÇ¸ù½áµã£¬ËùÒÔÆä¸¸Ç×½áµãÊÇÒ»¶¨´æÔÚµÄ;
+
+			//´Ó parent µÄº¢×ÓÖÐÑ¡³öÒ»¸ö½«LeafNode²åÈë,ÓÐ¿ÉÄÜ»áÔì³É·ÖÁÑ;
+			childNode* temp=choseNodeToMerge(parent, Q.top());
+			Q.pop();
+			if (temp->child->child.size()>M)//Èç¹û²åÈëÖ®ºó¸öÊý´óÓÚ M ÁË£¬Ôò»¹Òª¶Ô×N½áµã½øÐÐ·ÖÁÑ²Ù×÷;
+			{
+				splitNode(temp->child);//;
+			}
+		}//else
+
+	}//if
+
+}
+
+childNode * RTree::choseNodeToMerge(Node * Parent, Node * mergeNode)
+{
+	int num = Parent->child.size();
+	childNode suit=Parent->child[0];
+	double inc = areaIncrease(suit.region, mergeNode->region);
+	for (int i = 0; i < num; i++)
+	{
+		if (areaIncrease(Parent->child[i].region,mergeNode->region)<inc)
+		{
+			suit = Parent->child[i];
+			inc = areaIncrease(suit.region, mergeNode->region);
+		}
+		else if (areaIncrease(Parent->child[i].region, mergeNode->region)==inc)
+		{
+			//È¡Ò»¸öÃæ»ýÐ¡µÄ
+			if (area_compute(suit.region,mergeNode->region)>area_compute(Parent->child[i].region,mergeNode->region))
+			{
+				suit = Parent->child[i];
+			}
+		}//elseif
+	}//for
+	return &suit;
+}
+
 void RTree::Delete(Rectangle re) 
 {
 	Node* leafNode = ChooseLeaf(re);//ÕÒµ½re ËùÔÚµÄÒ¶×Ó½áµã;
@@ -245,6 +303,7 @@ void RTree::Delete(Rectangle re)
 			//É¾³ýre;
 			ifExist = true;
 			leafNode->child.erase(leafNode->child.begin() + i);
+			updateRegion(leafNode);
 			break;
 		}
 	}//for
@@ -255,21 +314,17 @@ void RTree::Delete(Rectangle re)
 	}
 
 	//ÒÑ¾­É¾³ý re µ«ÊÇÃ»ÓÐ¸üÐÂ region Óò;
-	if (leafNode->child.size()>m)
-	{
-		//Ö»Òª¸üÐÂ¸¸Ç×½áµãÃÇµÄ region Óò¾ÍºÃÁËÁË£»
-		updateRegion(leafNode);
-	}
-	else//Èç¹û½áµãµÄ¸öÊýÐ¡ÓÚÁËmÖ®ºó£¬ÐèÒª½«leafNode Ê£ÓàµÄ½áµãÖØÐÂ²åÈë;
+	if (leafNode->child.size()<m)//Èç¹û½áµãµÄ¸öÊýÐ¡ÓÚÁËmÖ®ºó£¬ÐèÒª½«leafNode Ê£ÓàµÄ½áµãÖØÐÂ²åÈë;
 	{
 //			ÔÙ»ØÊ×ÒÑ¾­ÊÇÒ»¸öÔÂÁË
 /*
 		ÕâÖÖÇé¿ö±È½Ï¸´ÔÓ
-		Èç¹û·¢ÏÖº¢×Ó¸öÊý²»Âú×ãRÊ÷ÐÔÖÊºó£¬»á½«µ±Ç°½áµã´ÓRÊ÷ÖÐÒÆ×ß£¬¼ÓÈëÒ»¸öÁ´±íÖÐ£¬Ò»Ö±ÕÒµ½Âú×ãÐÔÖÊ»òÕßÕÒµ½¸ù½áµã
-			È»ºó½«Á´±íÖÐµÄ½áµãÓëÔ­ÏÈËùÔÚ²ãÖÐµÄ½áµãºÏ²¢
-			ÕâÐÞºÃÏñºÜÂé·³µÄÑù×Ó
+		Èç¹û·¢ÏÖº¢×Ó¸öÊý²»Âú×ãRÊ÷ÐÔÖÊºó£¬»á½«µ±Ç°½áµã´ÓRÊ÷ÖÐÒÆ×ß£¬¼ÓÈëÒ»¸öÁ´±íÖÐ£¨Òª²»Òª¸üÐÂÇøÓòÄØ£¿¸ü£©£¬Ò»Ö±ÕÒµ½Âú×ãÐÔÖÊ»òÕßÕÒµ½¸ù½áµã
+		È»ºó½«Á´±íÖÐµÄ½áµãÓëÔ­ÏÈËùÔÚ²ãÖÐµÄ½áµãºÏ²¢
+		ÕâÐÞºÃÏñºÜÂé·³µÄÑù×Ó
 
 			ÏÂÎç»ØÀ´ÔÙÐ´
+			³£ÓëÍ¬ºÃÕù¸ßµÍ£¬²»ÓëÉµX¶÷¶÷¶÷
 */
 
 	}

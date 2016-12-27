@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
+#include<stack>
 using namespace std;
 
 struct Rectangle//注意一下拷贝函数的问题;！！！！！！！！！！！！！！！！！！！！！！！！！！！！
@@ -58,5 +59,9 @@ private:
 	void splitNode(Node* node);
 	inline bool RectangleEqual(Rectangle r1, Rectangle r2);
 	void updateRegion(Node* node);
+	void Condense(Node* LeafNode);//删除操作之后的压缩操作;
+	childNode* choseNodeToMerge(Node*Parent, Node*mergeNode);
+private:
+	stack<Node*> Q;//用于删除时保存删除结点及其层数信息;
 };
 
