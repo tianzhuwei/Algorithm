@@ -25,7 +25,7 @@ void MidanOfThree(int*& ve, int low ,int high){
 	//change(ve[low],ve[middle]);
 }
 
-int  static Partition(int ve[],int low ,int high){
+int  Partition(int ve[],int low ,int high){
 	int i=low;
 	int j=high;
 	int pivot=ve[low];
@@ -50,7 +50,7 @@ int  static Partition(int ve[],int low ,int high){
 	return i;
 }
 
-void static qucik_sort_MiddleOfThree(int ve[],int low,int high){
+void qucik_sort_MiddleOfThree(int ve[],int low,int high){
 	if (low>=high)
 	{
 		return;
@@ -69,9 +69,9 @@ void putout(int ve[],int num){
 }
 int main(){
 
-	cout<<"ÒÔÏÂÔËĞĞ½á¹ûÊÇÊ¹ÓÃ  ÈıÊıÈ¡ÖĞ  ¿ìËÙÅÅĞòË¼ÏëÃ»ÓĞ½øĞĞÓÅ»¯£¡"<<endl;
+	cout<<"ä»¥ä¸‹è¿è¡Œç»“æœæ˜¯ä½¿ç”¨  ä¸‰æ•°å–ä¸­  å¿«é€Ÿæ’åºæ€æƒ³æ²¡æœ‰è¿›è¡Œä¼˜åŒ–ï¼"<<endl;
 	int * ve;
-	int num=1000000;//Ò»°ÙÍòµÄÊı¾İ;
+	int num=1000000;//ä¸€ç™¾ä¸‡çš„æ•°æ®;
 	//int num=10000;
 	ve=new int[num];
 	srand((unsigned)time(NULL));
@@ -80,13 +80,13 @@ int main(){
 	clock_t time1=clock();
 	qucik_sort_MiddleOfThree(ve,0,num-1);
 	time1=clock()-time1;
-	cout<<"Ëæ»úÊı×é(Ò»°ÙÍò)ºÄÊ±£º"<<time1<<"ms"<<endl;
+	cout<<"éšæœºæ•°ç»„(ä¸€ç™¾ä¸‡)è€—æ—¶ï¼š"<<time1<<"ms"<<endl;
 //	putout(ve,num);
 
 	clock_t time2=clock();
 	qucik_sort_MiddleOfThree(ve,0,num-1);
 	time2=clock()-time2;
-	cout<<"ÉıĞòÊı×é(Ò»°ÙÍò)ºÄÊ±£º"<<time2<<"ms"<<endl;
+	cout<<"å‡åºæ•°ç»„(ä¸€ç™¾ä¸‡)è€—æ—¶ï¼š"<<time2<<"ms"<<endl;
 //	putout(ve,num);
 	for (int i=0;i<num;++i)
 	{
@@ -95,7 +95,7 @@ int main(){
 	clock_t time3 =clock();
 	qucik_sort_MiddleOfThree(ve,0,num-1);
 	time3=clock()-time3;
-	cout<<"ÖØ¸´Êı×é(Ò»°ÙÍò)ºÄÊ±£º"<<time3<<"ms"<<endl;
+	cout<<"é‡å¤æ•°ç»„(ä¸€ç™¾ä¸‡)è€—æ—¶ï¼š"<<time3<<"ms"<<endl;
 
 
 	delete[] ve;
